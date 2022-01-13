@@ -14,7 +14,22 @@ public class ThreadI extends Thread {
 	
 	@Override
 	public void run() {
+		int count = 0;
 		list.add(value);
+		while(list.avaliablePermits() == 0) {
+			try {
+				if(getPriority() < 10) {
+					setPriority(getPriority()+1);
+					Thread.sleep(5);
+				} else {
+					count++;
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if(count == 3)
+				break;
+		}
 		System.out.println("I" + value + ": Adicionando " + value);
 	}
 

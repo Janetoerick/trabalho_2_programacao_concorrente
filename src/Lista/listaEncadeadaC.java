@@ -6,11 +6,11 @@ import java.util.concurrent.Semaphore;
 public class ListaEncadeadaC {
 	
 	private volatile LinkedList<Integer> list;
-	private volatile Semaphore s; 
+	private volatile Semaphore semaphore; 
 
 	public ListaEncadeadaC() {
 		list = new LinkedList<Integer>();
-		s = new Semaphore(1);
+		semaphore = new Semaphore(1);
 	}
 	
 	public int get(int position) {
@@ -39,6 +39,22 @@ public class ListaEncadeadaC {
 	
 	public int size() {
 		return list.size();
+	}
+	
+	public void acquireSemaphore() {
+		try {
+			semaphore.acquire();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void releaseSemaphore() {
+		semaphore.release();
+	}
+	
+	public int avaliablePermits() {
+		return semaphore.availablePermits();
 	}
 	
 }

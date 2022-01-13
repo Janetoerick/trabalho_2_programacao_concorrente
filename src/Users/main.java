@@ -23,7 +23,7 @@ public class main {
 			Thread threadR = new ThreadR(i, list);
 			threadB.start();
 			threadR.start();
-			System.out.println("NUMERO DE THREADS EM EXECUCAO:" + Thread.activeCount());
+			
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
