@@ -7,34 +7,34 @@ import Thread.ThreadB;
 import Thread.ThreadI;
 import Thread.ThreadR;
 
-public class main {
+public class user1 {
 
 	public static void main(String[] args) {
 		ListaEncadeadaC list = new ListaEncadeadaC();
 		
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 20; i++) {
 			Thread threadI = new ThreadI(i, list);
 			threadI.start();
 			
 		}
 		
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 20; i++) {
 			Thread threadB = new ThreadB(i, list);
 			Thread threadR = new ThreadR(i, list);
-			threadB.start();
 			threadR.start();
+			threadB.start();
 			
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-			}
-			
+//			try {
+//				Thread.sleep(5);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		}
 		
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		list.listar();
