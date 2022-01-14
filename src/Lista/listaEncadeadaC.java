@@ -1,7 +1,5 @@
 package Lista;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
@@ -50,12 +48,9 @@ public class ListaEncadeadaC {
 	/*
 	 * Metodo que remove um valor de uma posicao desejada da lista "list"
 	 * */
-	public synchronized void remove(int position) {
-		try {
+	public void remove(int position) {
+		if(position < list.size())
 			list.remove(position);
-		}catch(IndexOutOfBoundsException e) {
-			System.out.println("entrou aqui filhao ------------------------------------------------------------");
-		}
 	}
 
 	/*
@@ -118,7 +113,8 @@ public class ListaEncadeadaC {
 		threadsR.remove();
 	}
 	
-	public Boolean ContainsThreadR(Long id) {
-		return threadsR.contains(id);
+	public Boolean ContainsThreadR() {
+		return threadsR.isEmpty();
 	}
+
 }
