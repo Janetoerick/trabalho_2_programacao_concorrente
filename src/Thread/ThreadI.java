@@ -26,11 +26,12 @@ public class ThreadI extends Thread {
 			try {
 				if(getPriority() < 10) { 			// aumenta o valor da prioridade
 					setPriority(getPriority()+1);  	// quanto mais a thread espera
-					Thread.sleep(10);				// garantindo que nao ocorra starvation
+													// garantindo que nao ocorra starvation
 				} else {
 					count++; // aumenta o valor, caso esteja demorando demais, tendo um alto risco
 							 // de estar entrando em deadlock
 				}
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

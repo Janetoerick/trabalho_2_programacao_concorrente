@@ -28,16 +28,20 @@ public class ThreadR extends Thread {
 			}
 		}
 		list.acquireSemaphore(); // dizendo que uma threadR vai comecar a executar e deve parar as demais
-		synchronized (list) { // garante que apenas essa thread esta acessando a lista
 
-			if (position < list.size()) { 	// caso exista a posicao na lista
-				list.remove(position); 		// remove o elemento
-				System.out.println("R" + getId() + ": Removeu valor da posicao " + position);
-			}
-			list.releaseSemaphore(); // libera o semaforo para as outras threads poderem executar
-			if (list.firstThreadR() > 0) // caso ainda haja thread para retirar da fila
-				list.removeThreadR();
+		// espera um curto tempo para que as threads que ja estavam em execucao terminem
+		try {
+			Thread.sleep(5);
+		} catch (InterruptedException e) {
 		}
+		
+		if (position < list.size()) { // caso exista a posicao na lista
+			list.remove(position); // remove o elemento
+			System.out.println("R" + getId() + ": Removeu valor da posicao " + position);
+		}
+		list.releaseSemaphore(); // libera o semaforo para as outras threads poderem executar
+		if (list.firstThreadR() > 0) // caso ainda haja thread para retirar da fila
+			list.removeThreadR();
 
 	}
 

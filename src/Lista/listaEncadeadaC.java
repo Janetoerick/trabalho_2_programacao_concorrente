@@ -9,10 +9,16 @@ public class ListaEncadeadaC {
 	// lista para ser usada pelas threads
 	private volatile LinkedList<Integer> list;
 
-	 // semaforo ligado a "threadR", no qual garante que todas as threads
-	 // de outros tipos parem para uma threadR executar
+	/*
+	 *  semaforo ligado a "threadR", no qual garante que todas as threads
+	 *  de outros tipos parem para uma threadR executar
+	 */
 	private volatile Semaphore semaphore;
 	
+	/*
+	 *  fila com as threadsR que querem executar, garantindo uma prioridade de execucao a partir
+	 *  do primeiro a chegar eh o primeiro a executar
+	*/
 	private volatile Queue<Long> threadsR;
 	
 
@@ -97,10 +103,18 @@ public class ListaEncadeadaC {
 		return semaphore.availablePermits();
 	}
 	
+	/*
+	 * Adiciona o id da thread na fila "threadsR"
+	 * 		\ utilizado apenas pela thread "threadR"
+	 * */
 	public void addThreadR(Long getId) {
 		threadsR.add(getId);
 	}
 	
+	/*
+	 * Retorna o primeiro elemento na fila "threadsR"
+	 * 		\ utilizado apenas pela thread "threadR"
+	 * */
 	public Long firstThreadR() {
 		if(threadsR.peek() != null)
 			return threadsR.peek();
@@ -109,12 +123,12 @@ public class ListaEncadeadaC {
 		
 	}
 	
+	/*
+	 * Remove o primeiro elemento na fila "threadsR"
+	 * 		\ utilizado apenas pela thread "threadR"
+	 * */
 	public void removeThreadR() {
 		threadsR.remove();
-	}
-	
-	public Boolean ContainsThreadR() {
-		return threadsR.isEmpty();
 	}
 
 }
