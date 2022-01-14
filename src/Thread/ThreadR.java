@@ -15,11 +15,6 @@ public class ThreadR extends Thread {
 	@Override
 	public void run() {
 		list.addThreadR(getId());		// adiciona essa thread na lista de espera
-//		if (!list.ContainsThreadR(getId())) { // Caso n tenha adicionado na lista de espera
-////			System.out.println(
-////					"****************************************************************************************************");
-//			list.addThreadR(getId());
-//		}
 		while (list.firstThreadR() != getId()) { // faz a verificacao se eh sua vez
 			
 			try {
@@ -28,20 +23,12 @@ public class ThreadR extends Thread {
 													// garantindo que nao ocorra starvation
 				}
 				Thread.sleep(5);
-				// System.out.println(getId() + " | " + list.firstThread() + " -- " +
-				// list.sizeThread());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		list.acquireSemaphore(); // dizendo que uma threadR vai comecar a executar e deve parar as demais
 		synchronized (list) { // garante que apenas essa thread esta acessando a lista
-//			System.out.println("ESSA THREAD PASSOU " + getId());
-
-//			try {
-//				Thread.sleep(5);
-//			} catch (InterruptedException e) {
-//			}
 
 			if (position < list.size()) { 	// caso exista a posicao na lista
 				list.remove(position); 		// remove o elemento
@@ -50,7 +37,6 @@ public class ThreadR extends Thread {
 			list.releaseSemaphore(); // libera o semaforo para as outras threads poderem executar
 			if (list.firstThreadR() > 0) // caso ainda haja thread para retirar da fila
 				list.removeThreadR();
-//			System.out.println("--> " + list.firstThreadR());
 		}
 
 	}
