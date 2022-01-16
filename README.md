@@ -21,5 +21,5 @@ na qual as threads deveriam seguir.
 
 
 
-Componentes:
+*Componentes:*
 - Janeto Erick da Costa Lima
