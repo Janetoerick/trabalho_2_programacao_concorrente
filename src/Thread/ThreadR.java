@@ -20,7 +20,7 @@ public class ThreadR extends Thread {
 			try {
 				if (getPriority() < 10) { 			// aumenta o valor da prioridade
 					setPriority(getPriority() + 1); // quanto mais a thread espera
-													// garantindo que nao ocorra starvation
+													// 
 				}
 				Thread.sleep(5);
 			} catch (InterruptedException e) {
@@ -31,7 +31,7 @@ public class ThreadR extends Thread {
 
 		// espera um curto tempo para que as threads que ja estavam em execucao terminem
 		try {
-			Thread.sleep(5);
+			Thread.sleep(10);
 		} catch (InterruptedException e) {
 		}
 		

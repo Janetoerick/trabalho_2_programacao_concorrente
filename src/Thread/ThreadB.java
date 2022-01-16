@@ -15,8 +15,6 @@ public class ThreadB extends Thread {
 	@Override
 	public void run() {
 		
-		int count = 0; // variavel auxiliar que garante que nao ocorra deadlock
-		
 		if(position < list.size()) { // caso exista a posicao na lista
 			
 			/*
@@ -26,19 +24,14 @@ public class ThreadB extends Thread {
 				try {
 					if(getPriority() < 10) { 			// aumenta o valor da prioridade
 						setPriority(getPriority()+1);  	// quanto mais a thread espera
-														// garantindo que nao ocorra starvation
-					} else {
-						count++; // aumenta o valor, caso esteja demorando demais, tendo um alto risco
-						 		 // de estar entrando em deadlock
+														// 
 					}
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if(count == 3) // quebra o while, garantindo a parada do estado de deadlock
-					break;
 			}
-			int value = list.get(position);
+			int value = list.get(position); // pega o valor da lista
 			if(value != -1)
 				System.out.println("B"+ getId() +": Buscando... | Achou valor "
 								+ value + " na posicao " + position);
